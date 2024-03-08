@@ -7,104 +7,60 @@ output: html_document
 
 ```{r}
 
-slopeEst1 <- c()
+generate_data_and_estimate_slope <- function(n, sd_e) {
+  slopeEst <- c()
+  for (i in 1:1000) {
+    x <- runif(n, 0, 100)
+    e <- rnorm(n, 0, sd_e)
 
-for (i in 1:1000) {
-  x <- runif(10, 0, 100)
-  e <- rnorm(10, 0, 5)
-
-  y <- 200 + x*10 + e
-  slope <- lm(y ~ x)$coef[2]
-  slopeEst1[i] <- slope
+    y <- 200 + x*10 + e
+    slope <- lm(y ~ x)$coef[2]
+    slopeEst[i] <- slope
+  }
+  return(list(mean = mean(slopeEst), sd = sd(slopeEst), MD = sum(abs(slopeEst - 10))/1000))
 }
 
-mean(slopeEst1); sd(slopeEst1)
-MD1 <- sum(abs(slopeEst1 - 10))/1000
+# Scenario 1
+result1 <- generate_data_and_estimate_slope(10, 5)
+result1$mean
+result1$sd
+result1$MD
 
+# Scenario 2
+result2 <- generate_data_and_estimate_slope(20, 5)
+result2$mean
+result2$sd
+result2$MD
 
-slopeEst2 <- c()
+# Scenario 3
+result3 <- generate_data_and_estimate_slope(50, 5)
+result3$mean
+result3$sd
+result3$MD
 
-for (i in 1:1000) {
-  x <- runif(20, 0, 100)
-  e <- rnorm(20, 0, 5)
+# Scenario 4
+result4 <- generate_data_and_estimate_slope(10, 2)
+result4$mean
+result4$sd
+result4$MD
 
-  y <- 200 + x*10 + e
-  slope <- lm(y ~ x)$coef[2]
-  slopeEst2[i] <- slope
-}
+# Scenario 5
+result5 <- generate_data_and_estimate_slope(10, 10)
+result5$mean
+result5$sd
+result5$MD
 
-mean(slopeEst2); sd(slopeEst2)
-MD2 <- sum(abs(slopeEst2 - 10))/1000
+# Scenario 6
+result6 <- generate_data_and_estimate_slope(10, 5)
+result6$mean
+result6$sd
+result6$MD
 
-
-slopeEst3 <- c()
-
-for (i in 1:1000) {
-  x <- runif(50, 0, 100)
-  e <- rnorm(50, 0, 5)
-
-  y <- 200 + x*10 + e
-  slope <- lm(y ~ x)$coef[2]
-  slopeEst3[i] <- slope
-}
-
-mean(slopeEst3); sd(slopeEst3)
-MD3 <- sum(abs(slopeEst3 - 10))/1000
-
-
-slopeEst4 <- c()
-for (i in 1:1000) {
-  x <- runif(10, 0, 100)
-  e <- rnorm(10, 0, 2)
-
-  y <- 200 + x*10 + e
-  slope <- lm(y ~ x)$coef[2]
-  slopeEst4[i] <- slope
-}
-
-mean(slopeEst4); sd(slopeEst4)
-
-
-
-slopeEst5 <- c()
-for (i in 1:1000) {
-  x <- runif(10, 0, 100)
-  e <- rnorm(10, 0, 10)
-
-  y <- 200 + x*10 + e
-  slope <- lm(y ~ x)$coef[2]
-  slopeEst5[i] <- slope
-}
-
-
-
-mean(slopeEst5); sd(slopeEst5)
-
-slopeEst6 <- c()
-for (i in 1:1000) {
-  x <- runif(10, 0, 50)
-  e <- rnorm(10, 0, 5)
-
-  y <- 200 + x*10 + e
-  slope <- lm(y ~ x)$coef[2]
-  slopeEst6[i] <- slope
-}
-
-mean(slopeEst6); sd(slopeEst6)
-
-
-
-slopeEst7 <- c()
-for (i in 1:1000) {
-  x <- runif(10, 0, 10)
-  e <- rnorm(10, 0, 5)
-
-  y <- 200 + x*10 + e
-  slope <- lm(y ~ x)$coef[2]
-  slopeEst7[i] <- slope
-}
-
-mean(slopeEst7); sd(slopeEst7)
+# Scenario 7
+result7 <- generate_data_and_estimate_slope(10, 5)
+result7$mean
+result7$sd
+result7$MD
 
 
 
